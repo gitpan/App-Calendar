@@ -1,0 +1,64 @@
+CalendarApp.pm - Web based calendar.
+
+System requirements:
+
+1.  Perl version 5.005 or greater.
+2.  Apache Web Server with modcgi.
+3.  The Perl Date::Calc library module from www.cpan.org.
+4.  GNU make.
+
+
+Installation:
+
+1.  Unpack the source archive:
+
+      tar zxvf App-Calendar-<version>.tar.gz
+	
+    or:
+
+      gzip -dc App-Calendar-<version>.tar.gz | tar xvf -
+
+2.  Change to the top-level subdirectory:
+
+      $ cd App-Calendar-<version>
+
+3.  Edit the CalendarApp.pm script with the domain name of 
+    the Web server and the duration that the browser should
+    maintain the app's cookies.  The default is 15 minutes
+    ('+15m').  The CGI.pm documentation ('man CGI') describes
+    how to specify cookie duration.
+
+4.  The top-level Makefile should work on any Unix or derivative
+    system.  It uses the host system's Perl installation to 
+    build the package Makefiles.  At the prompt, type:
+
+      $ perl Makefile.PL
+
+5.  Build the program modules and documentation.  Type:
+
+      $ make
+
+6.  If necessary, become root (via "su", for example), and 
+    install the source files and documentation in the system's 
+    site_perl library, and the "browser" script in 
+    /usr/local/bin, using the "make install" command:
+
+      $ su
+      Enter Password:
+      # make install
+
+7.  Install the calendar.cgi script in the server's CGI
+    script directory.
+
+8.  Add a HTML tag to the web page that contains the link
+    to the calendar.cgi script:
+
+      <a href="cgi-bin/calendar.cgi">Calendar</a>
+
+Copyright:
+
+This software is distributed under the Perl Artistic License.
+Refer to the file "Artistic" in this directory.  
+
+Please send all comments and bug reports to the author, 
+rkiesling@mainmatter.com.
