@@ -47,8 +47,9 @@ Installation:
       Enter Password:
       # make install
 
-7.  Install the calendar.cgi script in the server's CGI
-    script directory.
+7.  Install the calendar.cgi script in the Web server's CGI
+    script directory.  Make sure the permissions and ownership
+    are correct for the host and Web server.
 
 8.  Add a HTML tag to the web page that contains the link
     to the calendar.cgi script:

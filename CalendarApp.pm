@@ -44,6 +44,9 @@ use Date::Calc;
 use App::Calendar::MonthCalendar;
 
 my $domain = $ENV{SERVER_NAME};
+$domain =~ s/\:.*//;  # remove alternate port number if present.
+print STDERR "$domain\n";
+
 my $q = new CGI;
 
 my $buttons = <<'end-of-form';
