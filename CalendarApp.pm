@@ -1,5 +1,5 @@
 package App::Calendar::CalendarApp;
-$VERSION='0.01';
+$VERSION='0.02';
 
 =head1 NAME
 
@@ -15,7 +15,6 @@ $VERSION='0.01';
     my $yearparam = $q -> param('year');
     my $buttonparam = $q -> param('calendar');
 
-    my $domain = 'your.web.servers.domain';
     my $exp = '+15m';   # How long the browser should maintain
                         # the app's cookie.
 
@@ -44,17 +43,13 @@ use CGI;
 use Date::Calc;
 use App::Calendar::MonthCalendar;
 
-#
-# Set the domain name of the Web server that calls CaledarApp;
-#
-my $domain = 'aardvark.mainmatter.com';
-
+my $domain = $ENV{SERVER_NAME};
 my $q = new CGI;
 
 my $buttons = <<'end-of-form';
 <form action="calendar.cgi">
-  <input type="submit" name="button" value="Prev">
-  <input type="submit" name="button" value="Next">
+  <input type="submit" width="75" name="button" value="Last Month">
+  <input type="submit" width="75" name="button" value="Next Month">
 </form>
 end-of-form
 
@@ -82,7 +77,7 @@ sub App {
 		$month = 1;
 		$year++;
 	    }
-	} elsif ($buttonval =~ /Prev/) {
+	} elsif ($buttonval =~ /Last/) {
 	    $month--;
 	    if ($month < 1) {
 		$month = 12;
@@ -105,7 +100,7 @@ sub App {
     $tmpdate = &HTTPExp ($exp);
     $buf =~ s/Content-Type: text\/html//ms;
     $buf = "\n" . $buf;
-    $buf = "Set-Cookie: calendar=$monthyear; expires=$tmpdate; path=/; domain=aardvark.mainmatter.com\n" . $buf;
+    $buf = "Set-Cookie: calendar=$monthyear; expires=$tmpdate; path=/; domain=$domain\n" . $buf;
     $buf = "Content-Type: text/html\n" . $buf;
     $buf =~ s/(\<body.*?\>)/$1\n$buttons/;
     print $buf;
